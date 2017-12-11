@@ -1,0 +1,21 @@
+version: "3"
+services:
+  thoughtful-ml-py:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        - username=devel
+        - userid=1000
+    container_name: thoughtful-ml-py
+    image: thoughtful-ml-py
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+    volumes:
+      - ./:/home/devel/thoughtful-ml-py
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=$DISPLAY
+    stdin_open: true
